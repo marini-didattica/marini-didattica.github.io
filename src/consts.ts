@@ -23,6 +23,7 @@ export interface Section {
 export const SECTIONS: Section[] = [
   { slug: 'prime', label: 'Prime' },
   { slug: 'seconde', label: 'Seconde' },
+  { slug: 'olimpiadi', label: 'Olimpiadi' },
 ];
 
 /** Navigation links shared by every page. */

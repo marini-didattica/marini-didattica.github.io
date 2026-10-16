@@ -1,0 +1,53 @@
+---
+import SlideGrid from '@/components/SlideGrid.astro';
+import PageLayout from '@/layouts/PageLayout.astro';
+import type { Slide } from '@/types';
+
+// One object per slide deck. Deck URLs follow the /<repo>/<deck-folder>/ layout
+// produced by the deck repo's deploy workflow.
+const lessonSlides: Slide[] = [
+  {
+    title: 'Programmazione dinamica',
+    description: 'Introduzione alla programmazione dinamica per le gare olimpiche.',
+    href: 'https://marini-didattica.github.io/slide-olimpiadi/1-programmazione-dinamica/',
+    date: 'Ottobre 2026',
+    difficulty: 2,
+    tags: ['intro', 'olimpiadi'],
+    meta: [
+      { label: 'Autore', value: 'Mattia Marini' },
+      { label: 'Unità', value: '1' },
+    ],
+  },
+  {
+    title: 'Soluzioni problemi OII',
+    description:
+      'Raccolta di problemi dai siti di allenamento delle OII, tutti risolti con la programmazione dinamica.',
+    href: 'https://marini-didattica.github.io/slide-olimpiadi/2-soluzioni-problemi-oii/',
+    date: 'Ottobre 2026',
+    difficulty: 3,
+    tags: ['esercizi', 'olimpiadi', 'programmazione dinamica'],
+    meta: [
+      { label: 'Autore', value: 'Mattia Marini' },
+      { label: 'Unità', value: '2' },
+    ],
+    toc: [
+      'Numeri di Figonacci',
+      'Discesa massima',
+      'Police 3',
+      'Piano degli studi',
+      'Police 4',
+      'Spiedini di frutta',
+      'K-step ancestor',
+      'Ma chi è quel mona',
+    ],
+  },
+];
+---
+
+<PageLayout
+  eyebrow="Materiale didattico"
+  title="Olimpiadi"
+  description="Slides, materiali e link dedicati all'allenamento per le Olimpiadi Italiane di Informatica. Clicca una scheda per aprire le slide."
+>
+  <SlideGrid slides={lessonSlides} />
+</PageLayout>
