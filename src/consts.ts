@@ -8,6 +8,9 @@ export const A_S = `${startYear}/${startYear + 1}`;
 export const SITE_NAME = 'Marini didattica';
 export const SITE_DESCRIPTION = `Dispense e materiale per lezioni in classe e progetti relativi all'a.s. ${A_S}`;
 
+/** Project site that serves the reserved, read-only material. */
+export const RESERVED_CONTENT_URL = 'https://marini-didattica.github.io/riservato/';
+
 /** A top-bar section, one per class/project. */
 export interface Section {
   /** URL segment, e.g. "esempio" -> /esempio (with the deployment base). */
@@ -24,6 +27,7 @@ export const SECTIONS: Section[] = [
   { slug: 'prime', label: 'Prime' },
   { slug: 'seconde', label: 'Seconde' },
   { slug: 'olimpiadi', label: 'Olimpiadi' },
+  { slug: 'area-riservata', label: 'Area riservata' },
 ];
 
 /** Navigation links shared by every page. */
