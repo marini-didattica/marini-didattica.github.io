@@ -8,8 +8,22 @@ export const A_S = `${startYear}/${startYear + 1}`;
 export const SITE_NAME = 'Marini didattica';
 export const SITE_DESCRIPTION = `Dispense e materiale per lezioni in classe e progetti relativi all'a.s. ${A_S}`;
 
-/** Project site that serves the reserved, read-only material. */
-export const RESERVED_CONTENT_URL = 'https://marini-didattica.github.io/riservato/';
+/** Project site that hosts and browses all the material. */
+export const MATERIAL_URL = 'https://marini-didattica.github.io/materiale/';
+
+/** Public browser root. */
+export const PUBLIC_BROWSER_URL = `${MATERIAL_URL}public/`;
+
+/** Public raw files, compiled and served by the material site. */
+export const PUBLIC_CONTENT_URL = `${MATERIAL_URL}raw/public/`;
+
+/** Reserved browser base; append `<code>/` to open a student's material. */
+export const RESERVED_CONTENT_URL = `${MATERIAL_URL}private/`;
+
+/** Absolute URL of a public material file. */
+export function publicMaterialUrl(path: string): string {
+  return `${PUBLIC_CONTENT_URL}${path.replace(/^\/+/, '')}`;
+}
 
 /** A top-bar section, one per class/project. */
 export interface Section {

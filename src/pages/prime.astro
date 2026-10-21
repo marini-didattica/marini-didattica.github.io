@@ -1,6 +1,7 @@
 ---
 import Separator from '@/components/Separator.astro';
 import SlideGrid from '@/components/SlideGrid.astro';
+import { publicMaterialUrl } from '@/consts';
 import PageLayout from '@/layouts/PageLayout.astro';
 import type { Slide } from '@/types';
 
@@ -12,7 +13,7 @@ const lessonSlides: Slide[] = [
   {
   title: 'Il robot: come ragiona un pc?',
     description: 'Materiale extra per chi vuole andare oltre il programma.',
-    href: 'https://marini-didattica.github.io/misc/robot-intro/robot-intro.pdf',
+    href: publicMaterialUrl('robot-intro/robot-intro.pdf'),
     date: 'Settembre 2026',
     difficulty: 1,
     tags: ['intro'],
@@ -58,7 +59,7 @@ const extra: Slide[] = [
   {
     title: 'Simulazione prova 1',
     description: 'Simulazione di verifica su teoria, scrittura e lettura del codice Python',
-    href: 'https://marini-didattica.github.io/misc/esercitazioni-prime/esercitazione-1.pdf',
+    href: publicMaterialUrl('esercitazioni-prime/esercitazione-1.pdf'),
     date: 'Ottobre 2026',
     tags: ['esercizi', 'verifica', 'python'],
     toc: [
@@ -70,7 +71,7 @@ const extra: Slide[] = [
   {
     title: 'Cheatsheet python',
     description: 'Collezione di concetti e comandi fondamentali per programmare in python',
-    href: 'https://marini-didattica.github.io/misc/cheatsheet-prime/python-intro.pdf',
+    href: publicMaterialUrl('cheatsheet-prime/python-intro.pdf'),
     date: 'Ottobre 2026',
     tags: ['cheatsheet', 'intro', 'python'],
     toc: [
