@@ -314,6 +314,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+
   [data-props-for~="visibility"] {
     opacity: 1;
     transition: none;

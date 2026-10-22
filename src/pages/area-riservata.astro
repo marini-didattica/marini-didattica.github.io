@@ -64,62 +64,65 @@ import PageLayout from '@/layouts/PageLayout.astro';
 </PageLayout>
 
 <script>
-  const form = document.getElementById('reserved-code-form');
-  const input = document.getElementById('reserved-code');
-  const error = document.getElementById('reserved-code-error');
+  // Runs on the initial load and after every ClientRouter navigation.
+  document.addEventListener('astro:page-load', () => {
+    const form = document.getElementById('reserved-code-form');
+    const input = document.getElementById('reserved-code');
+    const error = document.getElementById('reserved-code-error');
 
-  if (
-    form instanceof HTMLFormElement &&
-    input instanceof HTMLInputElement &&
-    error instanceof HTMLElement
-  ) {
-    const base = form.dataset.base ?? 'https://marini-didattica.github.io/materiale/private/';
-    const codePattern = /^[A-HJ-NP-Z2-9]{8}$/;
-
-    try {
-      const saved = localStorage.getItem('riservato-code');
-
-      if (saved && !input.value) {
-        input.value = saved;
-      }
-    } catch {
-      // Ignore storage failures in restricted browsing contexts.
-    }
-
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-
-      const code = input.value
-        .trim()
-        .toUpperCase()
-        .replace(/[^A-Z0-9]/g, '');
-
-      input.value = code;
-
-      if (!codePattern.test(code)) {
-        error.classList.remove('hidden');
-        input.setAttribute('aria-invalid', 'true');
-        input.focus();
-        return;
-      }
-
-      error.classList.add('hidden');
-      input.removeAttribute('aria-invalid');
+    if (
+      form instanceof HTMLFormElement &&
+      input instanceof HTMLInputElement &&
+      error instanceof HTMLElement
+    ) {
+      const base = form.dataset.base ?? 'https://marini-didattica.github.io/materiale/private/';
+      const codePattern = /^[A-HJ-NP-Z2-9]{8}$/;
 
       try {
-        localStorage.setItem('riservato-code', code);
+        const saved = localStorage.getItem('riservato-code');
+
+        if (saved && !input.value) {
+          input.value = saved;
+        }
       } catch {
         // Ignore storage failures in restricted browsing contexts.
       }
 
-      window.location.assign(`${base}${code}/`);
-    });
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
 
-    input.addEventListener('input', () => {
-      if (!error.classList.contains('hidden')) {
+        const code = input.value
+          .trim()
+          .toUpperCase()
+          .replace(/[^A-Z0-9]/g, '');
+
+        input.value = code;
+
+        if (!codePattern.test(code)) {
+          error.classList.remove('hidden');
+          input.setAttribute('aria-invalid', 'true');
+          input.focus();
+          return;
+        }
+
         error.classList.add('hidden');
         input.removeAttribute('aria-invalid');
-      }
-    });
-  }
+
+        try {
+          localStorage.setItem('riservato-code', code);
+        } catch {
+          // Ignore storage failures in restricted browsing contexts.
+        }
+
+        window.location.assign(`${base}${code}/`);
+      });
+
+      input.addEventListener('input', () => {
+        if (!error.classList.contains('hidden')) {
+          error.classList.add('hidden');
+          input.removeAttribute('aria-invalid');
+        }
+      });
+    }
+  });
 </script>
