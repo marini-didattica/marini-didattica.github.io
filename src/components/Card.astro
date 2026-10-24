@@ -1,4 +1,5 @@
 ---
+import { isExternalHref } from '../utils/base';
 import { cn } from '../utils/cn';
 
 interface Props {
@@ -16,7 +17,7 @@ const classes = cn(
 ---
 
 {href ? (
-  <a href={href} class={classes}>
+  <a href={href} data-astro-reload={isExternalHref(href) || undefined} class={classes}>
     <slot />
   </a>
 ) : (

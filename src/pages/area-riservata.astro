@@ -76,7 +76,8 @@ import PageLayout from '@/layouts/PageLayout.astro';
       error instanceof HTMLElement
     ) {
       const base = form.dataset.base ?? 'https://marini-didattica.github.io/materiale/private/';
-      const codePattern = /^[A-HJ-NP-Z2-9]{8}$/;
+      // Keep in sync with `CODE_PATTERN` in materiale/scripts/build-content.ts.
+      const codePattern = /^[A-Z0-9]{8}$/;
 
       try {
         const saved = localStorage.getItem('riservato-code');

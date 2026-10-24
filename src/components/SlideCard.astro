@@ -1,5 +1,6 @@
 ---
 import type { Slide } from '../types';
+import { isExternalHref } from '../utils/base';
 import { cn } from '../utils/cn';
 import Tag from './Tag.astro';
 import TocPreview from './TocPreview.svelte';
@@ -38,6 +39,7 @@ const hasFooter = rating !== undefined || tags.length > 0 || Boolean(date);
         href={href}
         target="_blank"
         rel="noopener noreferrer"
+        data-astro-reload={isExternalHref(href) || undefined}
         class="text-inherit no-underline transition-colors after:absolute after:inset-0 after:content-[''] group-hover:text-accent"
       >
         {title}
