@@ -23,6 +23,9 @@
     color-scheme: light;
     background-color: var(--color-bg);
     scroll-behavior: smooth;
+    /* Keep the content width stable when short and long pages alternate, and
+       when crossing to/from the materiale deployment (which already does this). */
+    scrollbar-gutter: stable;
   }
 
   html.dark {

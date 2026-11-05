@@ -1,6 +1,20 @@
 @import "tailwindcss";
 @import "./global.css";
 @import "./theme.css";
-@import "@fontsource/inter/latin-400.css";
-@import "@fontsource/inter/latin-600.css";
-@import "@fontsource/inter/latin-700.css";
+
+/*
+  Inter lives under the site root so that the materiale deployment (same
+  origin) can reference the exact same URL. Shared font URLs mean the browser
+  cache is reused when navigating between the two sites, so the incoming
+  document never paints with a fallback font during the cross-document view
+  transition.
+  `font-display: block` keeps the first paint waiting for the (preloaded) font
+  instead of showing the fallback and swapping it a moment later.
+*/
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: block;
+  src: url("/fonts/inter-latin-wght-normal.woff2") format("woff2");
+}
