@@ -27,9 +27,8 @@ const { title, description = '', lang = 'en', robots } = Astro.props;
     {robots && <meta name="robots" content={robots} />}
     <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <!-- One variable font covers every weight. Preload it so the block period
-         declared in @font-face is as short as possible. This URL is shared with
-         the materiale deployment (see src/styles/app.css), so it is already in
-         the HTTP cache when navigating between the two sites. -->
+         declared in @font-face is as short as possible. Each deployment serves
+         its own copy from /fonts/. -->
     <link
       rel="preload"
       href="/fonts/inter-latin-wght-normal.woff2"
