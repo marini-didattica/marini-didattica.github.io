@@ -3,14 +3,13 @@ import SlideGrid from '@/components/SlideGrid.astro';
 import PageLayout from '@/layouts/PageLayout.astro';
 import type { Slide } from '@/types';
 
-// One object per slide deck. Each deck repo is its own Cloudflare Pages
-// project, so deck URLs follow the /<deck-folder>/ layout produced by that
-// repo's deploy workflow.
+// One object per slide deck. All decks are built from the `slide-seconde`
+// repository and served under /<track>/<deck>/ by one Cloudflare Pages project.
 const lessonSlides: Slide[] = [
   {
     title: 'Programmazione dinamica',
     description: 'Introduzione alla programmazione dinamica per le gare olimpiche.',
-    href: 'https://marini-didattica-slide-olimpiadi.pages.dev/1-programmazione-dinamica/',
+    href: 'https://marini-didattica-slides.pages.dev/olimpiadi/1-programmazione-dinamica/',
     date: 'Ottobre 2026',
     difficulty: 2,
     tags: ['intro', 'olimpiadi'],
@@ -23,7 +22,7 @@ const lessonSlides: Slide[] = [
     title: 'Soluzioni problemi OII',
     description:
       'Raccolta di problemi dai siti di allenamento delle OII, tutti risolti con la programmazione dinamica.',
-    href: 'https://marini-didattica-slide-olimpiadi.pages.dev/2-soluzioni-problemi-oii/',
+    href: 'https://marini-didattica-slides.pages.dev/olimpiadi/2-soluzioni-problemi-oii/',
     date: 'Ottobre 2026',
     difficulty: 3,
     tags: ['esercizi', 'olimpiadi', 'programmazione dinamica'],
