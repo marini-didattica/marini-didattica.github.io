@@ -10,12 +10,35 @@
       (() => {
         const BASE_PATH = "";
         const DESTINATION = "https://didattica.mattia-marini.com";
-        const path = location.pathname.startsWith(BASE_PATH)
-          ? location.pathname.slice(BASE_PATH.length) || "/"
-          : location.pathname;
-        location.replace(
-          DESTINATION + encodeURI(path) + location.search + location.hash,
+        // Legacy deck repositories. Their decks live in the consolidated
+        // slides site now. Only prefixes without their own GitHub Pages
+        // project reach this page (e.g. the renamed `slide-seconde` repo);
+        // the mappings are kept here so those old links still resolve.
+        const SLIDES_DESTINATION = "https://slides.didattica.mattia-marini.com";
+        const DECK_PREFIXES = {
+          "/slide-prime": "/prime",
+          "/slide-seconde": "/seconde",
+          "/slide-olimpiadi": "/olimpiadi",
+          "/slide-extra": "/extra",
+          "/extra-slides": "/extra",
+        };
+
+        const path = (
+          location.pathname.startsWith(BASE_PATH)
+            ? location.pathname.slice(BASE_PATH.length) || "/"
+            : location.pathname
+        ).replace(/\/index\.html$/, "/");
+
+        const deck = Object.keys(DECK_PREFIXES).find(
+          (prefix) => path === prefix || path.startsWith(prefix + "/"),
         );
+        const target = deck
+          ? SLIDES_DESTINATION +
+            DECK_PREFIXES[deck] +
+            encodeURI(path.slice(deck.length) || "/")
+          : DESTINATION + encodeURI(path);
+
+        location.replace(target + location.search + location.hash);
       })();
     </script>
   </head>
