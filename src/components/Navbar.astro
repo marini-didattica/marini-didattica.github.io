@@ -30,7 +30,7 @@ function normalizePath(path: string): string {
     <a href={base} class="text-lg font-bold text-text no-underline">{siteName}</a>
 
     {links.length > 0 && (
-      <ul class="absolute inset-x-0 hidden justify-center gap-[var(--space-md)] list-none p-0 pointer-events-none md:flex" role="list">
+      <ul class="absolute inset-x-0 hidden justify-center gap-[var(--space-md)] list-none p-0 pointer-events-none lg:flex" role="list">
         {links.map((link) => (
           <li class="pointer-events-auto">
             <a
@@ -84,7 +84,7 @@ function normalizePath(path: string): string {
       )}
       {links.length > 0 && (
         <MobileNav
-          client:media="(max-width: 767.98px)"
+          client:media="(max-width: 1023.98px)"
           links={links}
           currentPath={currentPath}
           action={action}

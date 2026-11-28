@@ -57,7 +57,7 @@
 <button
   bind:this={buttonEl}
   type="button"
-  class="inline-flex size-11 items-center justify-center rounded-[var(--button-radius)] border border-border text-text transition-colors hover:border-border-secondary hover:bg-bg-secondary md:hidden"
+  class="inline-flex size-11 items-center justify-center rounded-[var(--button-radius)] border border-border text-text transition-colors hover:border-border-secondary hover:bg-bg-secondary lg:hidden"
   aria-label={open ? 'Chiudi il menu' : 'Apri il menu'}
   aria-expanded={open}
   aria-controls="mobile-nav-menu"
@@ -74,7 +74,7 @@
   <div
     bind:this={panelEl}
     id="mobile-nav-menu"
-    class="absolute inset-x-0 top-full border-b border-border bg-bg px-[var(--space-lg)] py-[var(--space-sm)] shadow-(--shadow-lg) md:hidden"
+    class="absolute inset-x-0 top-full border-b border-border bg-bg px-[var(--space-lg)] py-[var(--space-sm)] shadow-(--shadow-lg) lg:hidden"
   >
     <ul class="flex list-none flex-col gap-1 p-0" role="list">
       {#each links as link}
