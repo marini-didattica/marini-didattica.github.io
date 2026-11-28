@@ -11,6 +11,12 @@ export const SITE_DESCRIPTION = `Dispense e materiale per lezioni in classe e pr
 /** Project site that hosts and browses all the material. */
 export const MATERIAL_URL = "https://materiale.didattica.mattia-marini.com/";
 
+/** Browser-only Python practice judge (separate Cloudflare Pages project). */
+export const JUDGE_URL = "https://marini-didattica-judge.pages.dev/";
+
+/** Entry pinned to the right edge of the navigation bar. */
+export const judgeLink = { href: JUDGE_URL, label: "Judge" };
+
 /** Public browser root. */
 export const PUBLIC_BROWSER_URL = `${MATERIAL_URL}public/`;
 
