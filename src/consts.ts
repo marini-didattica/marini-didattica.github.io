@@ -14,9 +14,6 @@ export const MATERIAL_URL = "https://materiale.didattica.mattia-marini.com/";
 /** Browser-only Python practice judge (separate Cloudflare Pages project). */
 export const JUDGE_URL = "https://marini-didattica-judge.pages.dev/";
 
-/** Entry pinned to the right edge of the navigation bar. */
-export const judgeLink = { href: JUDGE_URL, label: "Judge" };
-
 /** Public browser root. */
 export const PUBLIC_BROWSER_URL = `${MATERIAL_URL}public/`;
 
@@ -62,4 +59,6 @@ export const navLinks = [
 		href: withBase(`/${section.slug}`),
 		label: section.label,
 	})),
+	// External apps live at the end of the bar and open in a new tab.
+	{ href: JUDGE_URL, label: "Judge" },
 ];

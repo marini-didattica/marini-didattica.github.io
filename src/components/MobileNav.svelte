@@ -9,11 +9,9 @@
   interface Props {
     links: NavLink[];
     currentPath: string;
-    /** Optional external entry shown after the main links. */
-    action?: NavLink;
   }
 
-  let { links, currentPath, action }: Props = $props();
+  let { links, currentPath }: Props = $props();
 
   let open = $state(false);
   let buttonEl: HTMLButtonElement | undefined = $state();
@@ -81,7 +79,10 @@
         <li>
           <a
             href={link.href}
-            class="block rounded-[var(--radius-lg)] px-3 py-2 text-sm font-medium no-underline transition-colors {isCurrent(
+            target={isExternal(link.href) ? '_blank' : undefined}
+            rel={isExternal(link.href) ? 'noopener noreferrer' : undefined}
+            data-astro-reload={isExternal(link.href) || undefined}
+            class="flex items-center gap-1 rounded-[var(--radius-lg)] px-3 py-2 text-sm font-medium no-underline transition-colors {isCurrent(
               link.href,
             )
               ? 'bg-bg-secondary text-text'
@@ -90,37 +91,25 @@
             onclick={close}
           >
             {link.label}
+            {#if isExternal(link.href)}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-3.5 w-3.5 shrink-0"
+                aria-hidden="true"
+              >
+                <path d="M7 17 17 7"></path>
+                <path d="M7 7h10v10"></path>
+              </svg>
+            {/if}
           </a>
         </li>
       {/each}
-      {#if action}
-        <li class="mt-1 border-t border-border pt-1">
-          <a
-            href={action.href}
-            target={isExternal(action.href) ? '_blank' : undefined}
-            rel={isExternal(action.href) ? 'noopener noreferrer' : undefined}
-            data-astro-reload={isExternal(action.href) || undefined}
-            class="flex items-center justify-between gap-2 rounded-[var(--radius-lg)] px-3 py-2 text-sm font-semibold text-accent no-underline transition-colors hover:bg-accent/10 hover:text-accent-hover"
-            onclick={close}
-          >
-            {action.label}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="h-4 w-4 shrink-0"
-              aria-hidden="true"
-            >
-              <path d="M7 17 17 7"></path>
-              <path d="M7 7h10v10"></path>
-            </svg>
-          </a>
-        </li>
-      {/if}
     </ul>
   </div>
 {/if}

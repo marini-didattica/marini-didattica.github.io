@@ -1,7 +1,7 @@
 ---
 import Navbar from '@/components/Navbar.astro';
 import ThemeToggle from '@/components/ThemeToggle.svelte';
-import { SITE_NAME, navLinks, judgeLink } from '@/consts';
+import { SITE_NAME, navLinks } from '@/consts';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { cn } from '@/utils/cn';
 
@@ -28,7 +28,7 @@ const {
 ---
 
 <BaseLayout title={documentTitle} description={description}>
-  <Navbar slot="header" siteName={SITE_NAME} links={navLinks} action={judgeLink}>
+  <Navbar slot="header" siteName={SITE_NAME} links={navLinks}>
     <ThemeToggle client:load />
   </Navbar>
 

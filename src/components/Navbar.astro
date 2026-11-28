@@ -10,13 +10,10 @@ export interface NavLink {
 export interface Props {
   siteName: string;
   links?: NavLink[];
-  /** Optional entry pinned to the far right of the bar. */
-  action?: NavLink;
 }
 
-const { siteName, links = [], action } = Astro.props;
+const { siteName, links = [] } = Astro.props;
 const currentPath = Astro.url.pathname;
-const actionIsExternal = action ? isExternalHref(action.href) : false;
 
 function normalizePath(path: string): string {
   if (path === '/') return '/';
@@ -35,8 +32,11 @@ function normalizePath(path: string): string {
           <li class="pointer-events-auto">
             <a
               href={link.href}
+              target={isExternalHref(link.href) ? '_blank' : undefined}
+              rel={isExternalHref(link.href) ? 'noopener noreferrer' : undefined}
+              data-astro-reload={isExternalHref(link.href) || undefined}
               class:list={[
-                'text-sm font-medium text-text-secondary no-underline px-3 py-1.5 rounded-[var(--radius-lg)] transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:text-text hover:bg-bg-secondary hover:shadow-(--shadow-sm)',
+                'inline-flex items-center gap-1 text-sm font-medium text-text-secondary no-underline px-3 py-1.5 rounded-[var(--radius-lg)] transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:text-text hover:bg-bg-secondary hover:shadow-(--shadow-sm)',
                 {
                   'text-text bg-bg-secondary shadow-(--shadow-sm)':
                     normalizePath(currentPath) === normalizePath(link.href),
@@ -47,6 +47,22 @@ function normalizePath(path: string): string {
               }
             >
               {link.label}
+              {isExternalHref(link.href) && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="h-3.5 w-3.5 shrink-0"
+                  aria-hidden="true"
+                >
+                  <path d="M7 17 17 7"></path>
+                  <path d="M7 7h10v10"></path>
+                </svg>
+              )}
             </a>
           </li>
         ))}
@@ -55,39 +71,11 @@ function normalizePath(path: string): string {
 
     <div class="ml-auto flex items-center gap-[var(--space-sm)]">
       <slot />
-      {action && (
-        <a
-          href={action.href}
-          target={actionIsExternal ? '_blank' : undefined}
-          rel={actionIsExternal ? 'noopener noreferrer' : undefined}
-          data-astro-reload={actionIsExternal || undefined}
-          aria-label={action.label}
-          title={action.label}
-          class="hidden items-center gap-1.5 rounded-[var(--radius-lg)] border border-accent/30 bg-accent/10 px-2.5 py-1.5 text-sm font-semibold text-accent no-underline transition-colors hover:bg-accent/15 hover:text-accent-hover md:inline-flex"
-        >
-          <span class="hidden lg:inline">{action.label}</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="h-4 w-4 shrink-0"
-            aria-hidden="true"
-          >
-            <path d="M7 17 17 7"></path>
-            <path d="M7 7h10v10"></path>
-          </svg>
-        </a>
-      )}
       {links.length > 0 && (
         <MobileNav
           client:media="(max-width: 1023.98px)"
           links={links}
           currentPath={currentPath}
-          action={action}
         />
       )}
     </div>
